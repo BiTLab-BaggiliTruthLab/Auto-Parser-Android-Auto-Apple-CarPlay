@@ -56,7 +56,7 @@ def voice_commands():
 		    print(ctime,"\t",text)
 
 def apple(file,user_list=None):
-	#extract(file,user_list)
-	voice_commands()
+	extract(file,user_list)
+	#voice_commands()
 
 

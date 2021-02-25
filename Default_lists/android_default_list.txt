@@ -1,0 +1,5 @@
+data/data/com.google.android.projection.gearhead/shared_prefs/common_user_settings
+data/data/com.google.android.projection.gearhead/shared_prefs/app_state_shared_preferences.xml
+data/data/com.google.android.projection.gearhead/shared_prefs/default_app.xml
+data/data/com.google.android.projection.gearhead/shared_prefs/location_manager.xml
+data/data/com.google.android.googlequicksearchbox/app_session

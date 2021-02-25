@@ -1,0 +1,7 @@
+IconState
+private/var/mobile/Library/Preferences/com.apple.carplay.plist
+Library/Caches/locationd/cache.plist
+com.apple.celestial.plist
+private/var/mobile/Library/VoiceTrigger/SAT/en-US/ti/audi
+private/var/mobile/Library/Assistant
+private/var/mobile/Library/CallHistoryDB

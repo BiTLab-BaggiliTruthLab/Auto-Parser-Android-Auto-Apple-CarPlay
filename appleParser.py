@@ -1,6 +1,7 @@
 import speech_recognition as sr
 import os,tarfile,sys,glob,datetime
 import pathlib
+import plistlib
 
 def extract(file,user_list=None):
 	wordlist = []
@@ -38,6 +39,8 @@ def extract(file,user_list=None):
 						tar.extract(members[index], path='./Apple/Voice')
 					elif path.parent.name in ('CallHistoryDB'):
 						tar.extract(members[index], path='./Apple/Call_History')
+					else:
+						tar.extract(members[index], path='./Apple/Other')
 
 	tar.close()
 
@@ -54,9 +57,35 @@ def voice_commands():
 		    audio_data = r.record(source)
 		    text = r.recognize_google(audio_data)
 		    print(ctime,"\t",text)
+	print("\n")
+
+def pl_open(file):
+	with open(file, 'rb') as fp:
+		cp = plistlib.load(fp)
+	return cp
+
+def carplay_pairings():
+	print('CarPlay Pairings:\n')
+
+	cp = pl_open('./Apple/Settings/com.apple.carplay.plist')
+
+	pairing = cp['pairings'].keys()
+	label,name = [],[]
+	for pair in pairing:
+		pl = pl_open("./Apple/Settings/"+ pair + "-CarDisplayIconState.plist")
+		label.append(pl['metadata']['OEMIconLabel'])
+		name.append(cp['pairings'][pair]['name'])
+
+	for i in range(len(label)):
+		if label[i].lower() == name[i].lower():
+			print("\t"+label[i])
+		else:
+			print("\t"+label[i],name[i])
 
 def apple(file,user_list=None):
 	extract(file,user_list)
-	#voice_commands()
+	voice_commands()
+	carplay_pairings()
+
 
 

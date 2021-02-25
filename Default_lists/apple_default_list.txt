@@ -5,3 +5,4 @@ com.apple.celestial.plist
 private/var/mobile/Library/VoiceTrigger/SAT/en-US/ti/audi
 private/var/mobile/Library/Assistant
 private/var/mobile/Library/CallHistoryDB
+sms.db

@@ -3,7 +3,7 @@ import appleParser as AP
 import androidParser as AN
 def main(argv):
    try:
-      opts, args = getopt.getopt(argv,"ha:b:w:",['help'])  #Makes a list of arguments entered
+      opts, args = getopt.getopt(argv,"ha:b:",['help'])  #Makes a list of arguments entered
    except getopt.GetoptError:
       print ('Usage: Tool.py [options] <inputfile>')
       sys.exit(2)

@@ -3,3 +3,4 @@ data/data/com.google.android.projection.gearhead/shared_prefs/app_state_shared_p
 data/data/com.google.android.projection.gearhead/shared_prefs/default_app.xml
 data/data/com.google.android.projection.gearhead/shared_prefs/location_manager.xml
 data/data/com.google.android.googlequicksearchbox/app_session
+data/com.android.providers.contacts/databases

@@ -1,0 +1,149 @@
+table {
+  width:40%;
+  
+  
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+#t01 td:nth-child(1) {
+  width: 10em;
+  min-width: 10em;
+  max-width: 10em;
+  word-break: break-all;
+}
+#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+#t01 th {
+  background-color: black;
+  color: white;
+}
+
+
+
+table2 {
+  width:40; 
+   
+}
+table2, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+table2.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+#t02 td:nth-child(1) {
+  width: 11em;
+  min-width: 11em;
+  max-width: 11em;
+  word-break: break-all;
+}
+
+#t02 td:nth-child(2) {
+  width: 12em;
+  min-width: 12em;
+  max-width: 12em;
+  word-break: break-all;
+}
+
+#t02 tr:nth-child(even) {
+  background-color: #eee;
+}
+#t02 tr:nth-child(odd) {
+ background-color: #fff;
+}
+#t02 th {
+  background-color: black;
+  color: white;
+}
+
+
+table3 {
+  width:40; 
+   
+}
+table3, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+table3.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+#t03 tr:nth-child(even) {
+  background-color: #eee;
+}
+#t03 tr:nth-child(odd) {
+ background-color: #fff;
+}
+#t03 th {
+  background-color: black;
+  color: white;
+}
+
+
+table4 {
+  width:40; 
+   
+}
+table4, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+table4.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+#t04 tr:nth-child(even) {
+  background-color: #eee;
+}
+#t04 tr:nth-child(odd) {
+ background-color: #fff;
+}
+#t04 th {
+  background-color: black;
+  color: white;
+}
+
+h1 {
+    width:500px;
+    margin: 0 auto;
+    background: none;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+.boxed {
+  border: 1px solid green ;
+}

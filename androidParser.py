@@ -8,6 +8,8 @@ foldername = ""
 examiner = ""
 md5 = ""
 sha256 = ""
+check_md5 = ""
+check_sha256 = ""
 
 def xml_open(file):
 	with open(file,"r") as fp:
@@ -195,6 +197,48 @@ def voice_commands():
 	print(table)
 	return out_arr
 
+def report(cmds,pair,call,sms):
+	copyfile('./style.css', './{}/style.css'.format(foldername))
+	f = open("./{}/report.html".format(foldername),"w")
+	f.write("<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'><title>repl.it</title>\
+		     <link href='style.css' rel='stylesheet' type='text/css' /></head><body><h1>Apple Carplay Forensics Report</h1>\
+		     <div style='margin-left:auto;margin-right:auto;width:800px;height:250px;border:2px solid #000;'><h3>\
+		     Filename: {}<br>Case: {}<br>Timestamp: {}<br>Examiner: {}<br>Before Analysis:<br>MD5: {}<br>SHA256: {}<br>After Analysis:<br>MD5: {}<br>SHA256: {}</h3></div>".format(foldername,case,timestamp,examiner,md5,sha256,check_md5,check_sha256))
+	if not cmds:
+		pass
+	else:
+		f.write("<h2>Recent Siri Voice Commands</h2>\n")
+		df3 = pd.DataFrame(cmds)
+		df3 = df3.style.set_properties(**{'text-align': 'center'},**{'width': '60px'}).set_table_attributes('class="center"').hide_index().render(uuid='t03')
+		df3 = df3.replace("T_t03","t03")
+		f.write(df3)
+
+	f.write("<h2>Carplay Pairings</h2>\n")
+	df4 = pd.DataFrame(pair)
+	df4 = df4.style.set_properties(**{'text-align': 'left'},**{'width': '60px'}).set_table_attributes('class="center"').hide_index().render(uuid='t04')
+	df4 = df4.replace("T_t04","t04")
+	f.write(df4)
+	f.write("<h2>Recent SMS</h2>\n")
+	df2 = pd.DataFrame(sms)
+	df2 = df2.style.set_properties(**{'text-align': 'left'},**{'width': '60px'}).set_table_attributes('class="center"').hide_index().render(uuid='t02')
+	df2 = df2.replace("T_t02","t02")
+	f.write(df2)
+	f.write("<h2>Recent Phone Calls</h2>\n")
+	df1 = pd.DataFrame(call)
+	df1 = df1.style.set_properties(**{'text-align': 'center'},**{'width': '60px'}).set_table_attributes('class="center"').hide_index().render(uuid='t01')
+	df1 = df1.replace("T_t01","t01")
+	f.write(df1)
+	f.write("</body></html>")
+	f.close()
+
+
+def report2():
+	f = open("./{}/report.html".format(foldername),"w")
+	f.write("<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'><title>repl.it</title>\
+		     <link href='style.css' rel='stylesheet' type='text/css' /></head><body><h1>Apple Carplay Forensics Report</h1>\
+		     <div style='margin-left:auto;margin-right:auto;width:800px;height:200px;border:2px solid #000;'><h3>\
+		     Filename: {}<br>Case: {}<br>Timestamp: {}<br>Examiner: {}<br>Before Analysis:<br>MD5: {}<br>SHA256: {}<br>After Analysis:<br>MD5: {}<br>SHA256: {}</h3></div>".format(foldername,case,timestamp,examiner,md5,sha256,check_md5,check_sha256))
+
 
 def setup(file):
 	global case,examiner,md5,sha256,foldername,timestamp
@@ -207,10 +251,30 @@ def setup(file):
 	sha256 = "df73ffd582c3121630531feeabadf2ce29315ba42c7791646bf47c8ff20cb071"#hashlib.sha256(open(file,'rb').read()).hexdigest()
 	print("SHA256:",sha256)
 
+def hash_check(file):
+	global check_md5,check_sha256
+	print("After Analysis:")
+	check_md5 = hashlib.md5(open(file,'rb').read()).hexdigest()
+	if md5 == check_md5:
+		print("MD5:",check_md5,": Matched") 
+		check_md5 += " : Matched"
+	else: 
+		print("MD5:",check_md5,": Not Matched") 
+		check_md5 += " : Not Matched"
+	
+	check_sha256 = hashlib.sha256(open(file,'rb').read()).hexdigest()
+	if sha256 == check_sha256:
+		print("SHA256:",check_sha256,": Matched") 
+		check_sha256 += " : Matched"
+	else:
+		print("SHA256:",check_sha256,": Not Matched")
+		check_sha256 += " : Not Matched"
+
 def android(file,user_list=None):
 	setup(file)
 	#extract(file,user_list)
-	#aauto()
-	#voice_commands()
-	call_history()
-	#sms_history()
+	#sett = aauto()
+	#voice = voice_commands()
+	#call = call_history()
+	#sms = sms_history()
+	#report()

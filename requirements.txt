@@ -1,5 +1,5 @@
-pip3 install SpeechRecognition
-pip3 install Columnar
-pip3 install pandas
-pip3 install ipython
-pip3 install xmltodict
+SpeechRecognition
+Columnar
+pandas
+ipython
+xmltodict

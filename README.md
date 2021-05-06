@@ -7,12 +7,12 @@ To use this tool, please follow these steps below:
 To setup this tool, it is advised to configure a virtual environment inside the tool directory. To do this, navigate into the tool's main folder and enter the following commands documented below. These commands will setup a virtual environment inside the directory which will allow you to install the dependencies for this tool:
 
 ```bash
-$ python3 -m venv /directory/location/of/environment
+$ python3 -m venv ./virtualenv
 ```
 
-To activate or deactivate the environment within the directory:
+To activate or deactivate the environment:
 ```bash
-$ /path/to/environment bin/activate
+$ ./virtualenv/Scripts/activate
 $ deactivate
 ```
 

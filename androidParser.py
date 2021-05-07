@@ -305,6 +305,7 @@ def report(voice,sett,cont,call,sms):
 	f.close()
 
 def report2():
+	copyfile('./style.css', './{}/style.css'.format(foldername))
 	f = open("./{}/report.html".format(foldername),"w")
 	f.write("<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'><title>Android Auto</title>\
 		     <link href='style.css' rel='stylesheet' type='text/css' /></head><body><h1>Android Auto Forensics Report</h1>\

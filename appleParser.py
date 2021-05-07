@@ -339,6 +339,7 @@ def report(cmds,pair,app,cont,call,sms):
 
 
 def report2():
+	copyfile('./style.css', './{}/style.css'.format(foldername))
 	f = open("./{}/report.html".format(foldername),"w")
 	f.write("<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'><title>Apple Carplay</title>\
 			<link href='style.css' rel='stylesheet' type='text/css' /></head><body><h1>Apple Carplay Forensics Report</h1>\

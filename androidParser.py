@@ -309,7 +309,7 @@ def report2():
 	f = open("./{}/report.html".format(foldername),"w")
 	f.write("<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'><title>Android Auto</title>\
 		     <link href='style.css' rel='stylesheet' type='text/css' /></head><body><h1>Android Auto Forensics Report</h1>\
-		     <div style='margin-left:auto;margin-right:auto;width:800px;height:200px;border:2px solid #000;'><h3>\
+		     <div style='margin-left:auto;margin-right:auto;width:800px;height:250px;border:2px solid #000;'><h3>\
 		     Filename: {}<br>Case: {}<br>Timestamp: {}<br>Examiner: {}<br>Before Analysis:<br>MD5: {}<br>SHA256: {}<br>After Analysis:<br>MD5: {}<br>SHA256: {}</h3></div>".format(foldername,case,timestamp,examiner,md5,sha256,check_md5,check_sha256))
 
 def setup(file):

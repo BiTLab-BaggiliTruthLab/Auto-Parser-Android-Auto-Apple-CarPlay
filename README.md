@@ -36,7 +36,7 @@ Options:
          -h, --help
          -a            apple image tar
          -b            android image tar
-         -w            wordlist
+         -w            user created wordlist (this isn't required for default tool use) 
 ```
 
 Upon execution of the tool with the necessary options, the tool will ask for a Case Number and name of Examiner to preserve the chain of custody. Additionally, there is a built in feature to hash the TAR files before and after execution of the tool to ensure that the data has not been tampered.

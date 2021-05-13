@@ -16,7 +16,7 @@ def main(argv):
       print('         -h, --help')
       print('         -a            apple image tar')
       print('         -b            android image tar')
-      print("         -w            user created wordlist (this isn't required for default tool use")
+      print("         -w            user created wordlist (this isn't required for default tool use)")
       sys.exit()
 
    elif l == 1 and opts[0][0] == "-a":                         #Apple option with default wordlist

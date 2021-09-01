@@ -1,5 +1,5 @@
 # Auto-Parser: Android Auto & Apple CarPlay
-Welcome to the Android Auto and Apple CarPlay Parser. This tool is part of a research paper conducted on the digital forensics of the Android Auto and Apple Carplay applications.
+Welcome to the Android Auto and Apple CarPlay Parser. This tool is part of a research paper conducted on the digital forensics of the Android Auto and Apple Carplay applications. The research paper was submitted and accepted for presentation and publication at the 2021 ICDF2C Conference in Singapore. Information linking to the paper will be provided soon.
 
 To use this tool, please follow these steps below:
 

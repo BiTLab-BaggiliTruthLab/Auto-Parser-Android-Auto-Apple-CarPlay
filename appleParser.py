@@ -60,7 +60,7 @@ def extract(file,user_list=None):											#Extracts files from wordlist
 						tar.extract(members[index], path='./{}/Other'.format(foldername))
 	tar.close()
 
-def voice_commands():
+def voice_commands():																#
 	wav = glob.glob('./{}/Voice/*.wav'.format(foldername))							#Makes a list of wav file names
 	r = sr.Recognizer()
 	print("No Siri audio file found.") if not wav else print("Siri Commands:")
@@ -69,7 +69,7 @@ def voice_commands():
 	for file in wav:
 		exif = pathlib.Path(file).stat()
 		ctime = datetime.datetime.utcfromtimestamp(exif.st_ctime)
-		with sr.AudioFile(file) as source:
+		with sr.AudioFile(file) as source:											#Uses google speech recognition for siri command transcription
 			audio_data = r.record(source)
 			try:
 				text = r.recognize_google(audio_data)
@@ -88,12 +88,12 @@ def voice_commands():
 	print(table)
 	return cmds
 
-def pl_open(file):
+def pl_open(file):																	#Opens plist files
 	with open(file, 'rb') as fp:
 			cp = plistlib.load(fp)
 	return cp
 
-def carplay_pairings():
+def carplay_pairings():																#Locates and parses names of icons on carplay dashboard per car the phone has been connected to
 	print('CarPlay Pairings:\n')
 	try:
 		cp = pl_open('./{}/Settings/com.apple.carplay.plist'.format(foldername))
@@ -129,16 +129,19 @@ def carplay_pairings():
 
 	headers = pairing['Paired To']
 	data = pairing['Apps']
-	diff = abs(len(data[0]) - len(data[1]))
-	if len(data[0]) < len(data[1]):
-		for k in range(diff):
-			data[0].append("")
-	elif len(data[0]) > len(data[1]):
-		for k in range(diff):
-			data[1].append("")
-	else:
-		pass
-
+	mx = []
+	e_ct = 0
+	while e_ct < len(data):
+		mx.append(len(data[e_ct]))
+		e_ct += 1
+	
+	data_ind = 0
+	while data_ind < len(data):
+		extra = max(mx) - mx[data_ind]
+		for k in range(extra):
+			data[data_ind].append("")
+		data_ind += 1
+	
 	tab_row = []
 	for i in range(len(data[0])):
 		tab_row.append([data[0][i],data[1][i]])
@@ -146,7 +149,7 @@ def carplay_pairings():
 	print(table)
 	return pairing
 
-def settings():
+def settings():																			#Locates and parses recent apps used by user
 	print('Settings:\n')
 	try:
 		cp = pl_open('./{}/Settings/com.apple.springboard.plist'.format(foldername))
@@ -173,7 +176,7 @@ def settings():
 	print(table)
 	return app
 
-def contacts():
+def contacts():																			#Locates and parses user contacts
 	print("Contacts:\n")
 	path = "./{}/Call_History/AddressBook.sqlitedb".format(foldername)
 	if not os.path.exists(path):
@@ -203,7 +206,7 @@ def contacts():
 	except:
 		print("Error with ./{}/Call_History/AddressBook.sqlitedb".format(foldername))
 
-def call_history():
+def call_history():																			#Locates and parses user call history
 	print("Phone Call History:\n")
 	path = "./{}/Call_History/CallHistory.storedata".format(foldername)
 	if not os.path.exists(path):
@@ -238,7 +241,7 @@ def call_history():
 	except:
 		print("Error with ./{}/Call_History/CallHistory.storedata".format(foldername))
 
-def sms_history():
+def sms_history():																			#Locates and parses user text message history
 	print("SMS History:\n")
 	path = "./{}/SMS/sms.db".format(foldername)
 	if not os.path.exists(path):
@@ -273,7 +276,7 @@ def sms_history():
 	except:
 		print("Error with ./{}/SMS/sms.db".format(foldername))
 
-def report(cmds,pair,app,cont,call,sms):
+def report(cmds,pair,app,cont,call,sms):																#Generates report with parsed data
 	copyfile('./style.css', './{}/style.css'.format(foldername))
 	f = open("./{}/report.html".format(foldername),"w")
 	f.write("<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'><title>Apple Carplay</title>\
@@ -338,7 +341,7 @@ def report(cmds,pair,app,cont,call,sms):
 	f.close()
 
 
-def report2():
+def report2():																					#Generates Report on just the aquisition information and checked integrity 
 	copyfile('./style.css', './{}/style.css'.format(foldername))
 	f = open("./{}/report.html".format(foldername),"w")
 	f.write("<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'><title>Apple Carplay</title>\
@@ -357,7 +360,7 @@ def setup(file):
 	sha256 = hashlib.sha256(open(file,'rb').read()).hexdigest()
 	print("SHA256:",sha256)
 
-def hash_check(file):
+def hash_check(file):												#Re-hashes tar file to check integrity
 	global check_md5,check_sha256
 	print("After Analysis:")
 	check_md5 = hashlib.md5(open(file,'rb').read()).hexdigest()

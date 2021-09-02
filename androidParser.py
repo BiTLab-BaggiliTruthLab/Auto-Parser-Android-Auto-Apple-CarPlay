@@ -5,6 +5,7 @@ from shutil import copyfile
 import pandas as pd
 import hashlib
 
+#Data used for end report
 timestamp = ""
 case = ""
 foldername = ""
@@ -14,12 +15,12 @@ sha256 = ""
 check_md5 = ""
 check_sha256 = ""
 
-def xml_open(file):
+def xml_open(file):								#opens xml files
 	with open(file,"r") as fp:
 		dc = xmltodict.parse(fp.read())
 	return dc
 
-def extract(file,user_list=None):
+def extract(file,user_list=None):				#Extracts files from wordlist
 	wordlist = []
 	if user_list == None:
 		try:
@@ -59,7 +60,7 @@ def extract(file,user_list=None):
 						tar.extract(members[index], path='./{}/Other'.format(foldername))
 	tar.close()
 
-def aauto():
+def aauto():											#Parses data from each car the phone connected to 
 	print("Android Auto:\n")
 	path = "./{}/Comm/carservicedata.db".format(foldername)
 	if not os.path.exists(path):
@@ -92,7 +93,7 @@ def aauto():
 	except:
 		print("Error with ./{}/Comm/carservicedata.db".format(foldername))
 
-def contacts():
+def contacts():														#Locates and parses user contacts
 	print("Contacts:\n")
 	path = "./{}/Comm/contacts2.db".format(foldername)
 	if not os.path.exists(path):
@@ -122,7 +123,7 @@ def contacts():
 	except:
 		print("Error with ./{}/Comm/contacts2.db".format(foldername))
 
-def sms_history():
+def sms_history():														#Locates and parses user text message history
 	print("SMS History:\n")
 	path = "./{}/Comm/mmssms.db".format(foldername)
 	if not os.path.exists(path):
@@ -155,7 +156,7 @@ def sms_history():
 	except:
 		print("Error with ./{}/Comm/mmssms.db".format(foldername))
 
-def call_history():
+def call_history():															#Locates and parses user call history
 	print("Phone Call History:\n")
 	path = "./{}/Comm/calllog.db".format(foldername)
 	if not os.path.exists(path):
@@ -188,7 +189,7 @@ def call_history():
 	except:
 		print("Error with ./{}/Comm/calllog.db".format(foldername))
 
-def voice_commands():
+def voice_commands():											#Locates and parses user voice commands
 	print("Android Assistant")
 	pb = glob.glob('./{}/Voice/*.binarypb'.format(foldername))
 	out_arr = {}
@@ -203,7 +204,7 @@ def voice_commands():
 		while True:
 		    m = pattern.search(data[curpos:])
 		    if m is None: break
-		    matches.append(m.group(0))#curpos + m.start())
+		    matches.append(m.group(0))
 		    curpos += m.end()
 
 		if len(matches) != 0:
@@ -248,7 +249,7 @@ def voice_commands():
 	print(table)
 	return cmds
 
-def report(voice,sett,cont,call,sms):
+def report(voice,sett,cont,call,sms):									#Generates report with parsed data
 	copyfile('./style.css', './{}/style.css'.format(foldername))
 	f = open("./{}/report.html".format(foldername),"w")
 	f.write("<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'><title>Android Auto</title>\
@@ -304,7 +305,7 @@ def report(voice,sett,cont,call,sms):
 	f.write("</body></html>")
 	f.close()
 
-def report2():
+def report2():															#Generates Report on just the aquisition information and checked integrity 
 	copyfile('./style.css', './{}/style.css'.format(foldername))
 	f = open("./{}/report.html".format(foldername),"w")
 	f.write("<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'><title>Android Auto</title>\
@@ -323,7 +324,7 @@ def setup(file):
 	sha256 = hashlib.sha256(open(file,'rb').read()).hexdigest()
 	print("SHA256:",sha256)
 
-def hash_check(file):
+def hash_check(file):											#Re-hashes tar file to check integrity
 	global check_md5,check_sha256
 	print("After Analysis:")
 	check_md5 = hashlib.md5(open(file,'rb').read()).hexdigest()

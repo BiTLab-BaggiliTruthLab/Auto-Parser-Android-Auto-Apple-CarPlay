@@ -68,7 +68,7 @@ def voice_commands():																#
 	cmds = {'timestamp':[],'command':[]}
 	for file in wav:
 		exif = pathlib.Path(file).stat()
-		ctime = datetime.datetime.utcfromtimestamp(exif.st_ctime)
+		ctime = datetime.datetime.utcfromtimestamp(exif.st_mtime)
 		with sr.AudioFile(file) as source:											#Uses google speech recognition for siri command transcription
 			audio_data = r.record(source)
 			try:
